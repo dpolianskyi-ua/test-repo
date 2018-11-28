@@ -27,28 +27,22 @@ pipeline {
             stage('Checkout') {
                 steps {
                     checkout scm
+                    checkpoint 'Checkout Complete'
                 }
             }
-
-            checkpoint 'Checkout Complete'
 
             stage('Build') {
                 steps {
-
+                    checkpoint 'Build Complete'
                 }
             }
-
-            checkpoint 'Build Complete'
 
             stage('Archive') {
                 steps {
-
+                   checkpoint 'Archive Complete'
                 }
             }
-
-            checkpoint 'Archive Complete'
     }
-
 }
 
 
