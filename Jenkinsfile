@@ -1,17 +1,39 @@
-node {
-        stage 'Checkout' {
+#!groovy
+import groovy.json.JsonSlurperClassic
+
+if (env.BRANCH_NAME == 'master') {
+    properties([[$class  : 'BuildDiscarderProperty',
+                 strategy: [$class               : 'LogRotator',
+                            artifactDaysToKeepStr: '',
+                            artifactNumToKeepStr : '10',
+                            daysToKeepStr        : '',
+                            numToKeepStr         : '10']
+                ]
+    ])
+} else {
+    properties([[$class  : 'BuildDiscarderProperty',
+                 strategy: [$class               : 'LogRotator',
+                            artifactDaysToKeepStr: '',
+                            artifactNumToKeepStr : '2',
+                            daysToKeepStr        : '',
+                            numToKeepStr         : '2']
+                ]])
+}
+
+node('test-repo') {
+        stage('Checkout') {
             checkout scm
         }
 
         checkpoint 'Checkout Complete'
 
-        stage 'Build' {
+        stage('Build') {
 
         }
 
         checkpoint 'Build Complete'
 
-        stage 'Archive' {
+        stage('Archive') {
 
         }
 
