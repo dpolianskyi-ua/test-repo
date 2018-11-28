@@ -1,0 +1,10 @@
+---
+applications:
+- name: pal-tracker
+  path: build/libs/pal-tracker.jar
+  routes:
+  - route: pal-tracker-dpolianskyi-review.apps.pikes.pal.pivotal.io
+    services:
+    - tracker-database
+  env:
+    WELCOME_MESSAGE: Hello from the review environment
