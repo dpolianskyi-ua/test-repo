@@ -29,6 +29,16 @@ pipeline {
                     checkout scm
                 }
             }
+
+            stage('Test') {
+                steps('Pre-install') {
+                   curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1.1-linux-x64.tar.gz | tar xvz
+                }
+
+                steps {
+                    sh './gradlew clean build'
+                }
+            }
         }
 }
 
